@@ -1,8 +1,8 @@
 package com.mgbt.userservice.controllers;
 
 import com.mgbt.userservice.entities.User;
-import com.mgbt.userservice.services.CarService;
-import com.mgbt.userservice.services.MotorbikeService;
+import com.mgbt.userservice.feignclients.CarFeignClient;
+import com.mgbt.userservice.feignclients.MotorbikeFeignClient;
 import com.mgbt.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +19,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    CarService carService;
-
-    @Autowired
-    MotorbikeService motorbikeService;
-
     @GetMapping
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
@@ -34,8 +28,8 @@ public class UserController {
     public ResponseEntity<?> getById(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         response.put("user", userService.findById(id));
-        response.put("cars", carService.getByIdUser(id));
-        response.put("motorbikes", motorbikeService.getByIdUser(id));
+        response.put("cars", userService.getCarsByIdUser(id));
+        response.put("motorbikes", userService.getMotorbikesByIdUser(id));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
