@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "motorbike-service", url = "http://localhost:8082")
+@FeignClient(name = "motorbike-service", url = "http://localhost:8083")
 public interface MotorbikeFeignClient {
     @GetMapping("/api/motorbikes")
     public List<Car> getMotorbikes(@RequestParam(required = false) Long idUser);
