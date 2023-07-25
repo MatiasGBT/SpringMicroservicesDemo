@@ -1,6 +1,6 @@
 package com.mgbt.userservice.services;
 
-import com.mgbt.userservice.entities.User;
+import com.mgbt.userservice.entities.UserApp;
 import com.mgbt.userservice.feignclients.CarFeignClient;
 import com.mgbt.userservice.feignclients.MotorbikeFeignClient;
 import com.mgbt.userservice.models.Car;
@@ -23,22 +23,22 @@ public class UserServiceImpl implements UserService {
     MotorbikeFeignClient motorbikeFeignClient;
 
     @Override
-    public List<User> getAll() {
+    public List<UserApp> getAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User findById(Long id) {
+    public UserApp findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public User save(User user) {
+    public UserApp save(UserApp user) {
         return userRepository.save(user);
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(UserApp user) {
         userRepository.delete(user);
     }
 

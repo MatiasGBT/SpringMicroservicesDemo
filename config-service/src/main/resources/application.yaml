@@ -1,0 +1,13 @@
+
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          default-label: FeignClient
+          uri: https://github.com/MatiasGBT/SpringMicroservicesDemo
+          search-paths: config-data
+  application:
+    name: config-server

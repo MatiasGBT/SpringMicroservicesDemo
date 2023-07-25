@@ -1,8 +1,6 @@
 package com.mgbt.userservice.controllers;
 
-import com.mgbt.userservice.entities.User;
-import com.mgbt.userservice.feignclients.CarFeignClient;
-import com.mgbt.userservice.feignclients.MotorbikeFeignClient;
+import com.mgbt.userservice.entities.UserApp;
 import com.mgbt.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,18 +32,18 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody User user) {
+    public ResponseEntity<?> save(@RequestBody UserApp user) {
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody User user) {
+    public ResponseEntity<?> update(@RequestBody UserApp user) {
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        User user = userService.findById(id);
+        UserApp user = userService.findById(id);
         userService.delete(user);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
     }
