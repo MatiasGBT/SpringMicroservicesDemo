@@ -13,17 +13,17 @@ spring:
     gateway:
       discovery:
         locator:
-          enable: true
+          enabled: true
       routes:
         - id: user-service
           uri: lb://user-service #lb from load balancer. The load balancer chooses the best instance of a microservice (the one with the least traffic).
           predicates:
-            - Path=/user/**
+            - Path=/users/**
         - id: car-service
           uri: lb://car-service
           predicates:
-            - Path=/car/**
+            - Path=/cars/**
         - id: motorbike-service
           uri: lb://motorbike-service
           predicates:
-            - Path=/motorbike/**
+            - Path=/motorbikes/**
