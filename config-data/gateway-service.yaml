@@ -18,12 +18,12 @@ spring:
         - id: user-service
           uri: lb://user-service #lb from load balancer. The load balancer chooses the best instance of a microservice (the one with the least traffic).
           predicates:
-            - Path=/users/**
+            - Path=/api/users/**
         - id: car-service
           uri: lb://car-service
           predicates:
-            - Path=/cars/**
+            - Path=/api/cars/**
         - id: motorbike-service
           uri: lb://motorbike-service
           predicates:
-            - Path=/motorbikes/**
+            - Path=/api/motorbikes/**
