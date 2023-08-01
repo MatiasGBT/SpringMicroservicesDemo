@@ -52,6 +52,7 @@ public class UserController {
 
     private ResponseEntity<?> fallbackGetById(@PathVariable Long id, RuntimeException exception) {
         Map<String, Object> response = new HashMap<>();
+        response.put("user", userService.findById(id));
         response.put("message", "At the moment, we are unable to obtain information about the user's vehicles. Please try again later.");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
