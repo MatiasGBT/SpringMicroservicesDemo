@@ -2,6 +2,7 @@ package com.mgbt.userservice.controllers;
 
 import com.mgbt.userservice.entities.UserApp;
 import com.mgbt.userservice.services.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @CircuitBreaker(name = "allServices", fallbackMethod = "fallbackGetById")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         response.put("user", userService.findById(id));
@@ -46,5 +48,11 @@ public class UserController {
         UserApp user = userService.findById(id);
         userService.delete(user);
         return new ResponseEntity<>("User deleted", HttpStatus.OK);
+    }
+
+    private ResponseEntity<?> fallbackGetById(@PathVariable Long id, RuntimeException exception) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "At the moment, we are unable to obtain information about the user's vehicles. Please try again later.");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
